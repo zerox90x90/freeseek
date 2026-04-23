@@ -4,20 +4,16 @@ Use **DeepSeek** as the backend for **[Claude Code](https://claude.ai/code)** �
 
 A local proxy that wraps `chat.deepseek.com` (the free web UI) behind an Anthropic-compatible API, so Claude Code can talk to it like it's Claude.
 
-> Only tested on **macOS**. Linux should work; Windows is untested.
+> Only tested on **macOS**.
 
 ## Prerequisites
 
 You must have **[Claude Code](https://claude.ai/code)** installed, which requires **Node.js / npm**.
 
-1. Install Node.js (ships with `npm`) — [nodejs.org](https://nodejs.org/) or via a package manager:
+1. Install Node.js (ships with `npm`) — [nodejs.org](https://nodejs.org/) or via Homebrew:
 
    ```bash
-   # macOS (Homebrew)
    brew install node
-
-   # Linux (Debian/Ubuntu)
-   sudo apt install nodejs npm
    ```
 
 2. Install Claude Code:
