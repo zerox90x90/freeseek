@@ -1,0 +1,35 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.claude/
+
+# State files — contain credentials and cached session data
+~/.deepseek-proxy/
+state.json
+sessions.json
+files.json
+summaries.json
+
+# Logs
+*.log
+
+# Build / dist artifacts
+dist/
+build/
+*.egg-info/
+deepseek_proxy.egg-info/
+.eggs/
+
+# Local dev / docs
+tests/
+CLAUDE.md
+.claude/
+.idea/
+.vscode/
+*.swp
+*.swo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

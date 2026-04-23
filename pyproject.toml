@@ -1,0 +1,14 @@
+[project]
+name = "deepseek-proxy"
+version = "0.0.1"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx[http2]>=0.27",
+    "playwright>=1.47",
+    "wasmtime>=25",
+    "numpy>=2.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["probe*", "app*"]
