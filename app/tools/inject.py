@@ -25,15 +25,31 @@ Available tools (JSON schema):
 """
 
 
+# Claude Code ships these as Anthropic server-side tools that the proxy cannot
+# execute. DeepSeek's :search suffix replaces WebSearch via upstream web-RAG.
+_UNSUPPORTED_TOOL_NAMES = {"WebSearch"}
+_UNSUPPORTED_TOOL_TYPES = {
+    "web_search_20250305",
+    "web_search",
+}
+
+
+def _is_unsupported(name: str, type_: str) -> bool:
+    return name in _UNSUPPORTED_TOOL_NAMES or type_ in _UNSUPPORTED_TOOL_TYPES
+
+
 def normalize_openai_tools(tools: list[dict]) -> list[dict]:
     """Accept OpenAI tool format: {type:"function", function:{name, description, parameters}}."""
     out = []
     for t in tools:
         if t.get("type") == "function" and "function" in t:
             fn = t["function"]
+            name = fn.get("name", "")
+            if _is_unsupported(name, t.get("type", "")):
+                continue
             out.append(
                 {
-                    "name": fn.get("name", ""),
+                    "name": name,
                     "description": fn.get("description", ""),
                     "parameters": fn.get("parameters", {}),
                 }
@@ -43,14 +59,19 @@ def normalize_openai_tools(tools: list[dict]) -> list[dict]:
 
 def normalize_anthropic_tools(tools: list[dict]) -> list[dict]:
     """Anthropic tool format: {name, description, input_schema}."""
-    return [
-        {
-            "name": t.get("name", ""),
-            "description": t.get("description", ""),
-            "parameters": t.get("input_schema", {}),
-        }
-        for t in tools
-    ]
+    out = []
+    for t in tools:
+        name = t.get("name", "")
+        if _is_unsupported(name, t.get("type", "")):
+            continue
+        out.append(
+            {
+                "name": name,
+                "description": t.get("description", ""),
+                "parameters": t.get("input_schema", {}),
+            }
+        )
+    return out
 
 
 def tool_system_block(tools: list[dict[str, Any]]) -> str:

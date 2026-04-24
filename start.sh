@@ -5,9 +5,10 @@
 # Usage: ./start.sh [claude args...]
 #   Env overrides:
 #     PORT              (default 8765)
-#     MODEL             (default deepseek-reasoner; append :search to enable
-#                        DeepSeek's upstream web-RAG — usually unwanted since
-#                        Claude Code has its own WebSearch/WebFetch tools)
+#     MODEL             (default deepseek-reasoner:search; :search enables
+#                        DeepSeek's upstream web-RAG. Claude Code's own
+#                        WebSearch tool is stripped server-side because it's
+#                        an Anthropic server-tool the proxy cannot fulfill.)
 #     FAST_MODEL        (default deepseek-chat)
 #     PROXY_API_KEY     (optional; also gates the proxy if set)
 
@@ -17,7 +18,7 @@ INVOKE_DIR="$PWD"
 cd "$(dirname "$0")"
 
 PORT="${PORT:-8765}"
-MODEL="${MODEL:-deepseek-reasoner}"
+MODEL="${MODEL:-deepseek-reasoner:search}"
 FAST_MODEL="${FAST_MODEL:-deepseek-chat}"
 LOGFILE="${LOGFILE:-/tmp/deepseek-proxy.log}"
 PROXY_API_KEY="${PROXY_API_KEY:-local-dev-key}"
