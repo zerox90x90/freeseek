@@ -1,4 +1,4 @@
-# freeseek
+# freeclaude
 
 Use **DeepSeek** as the backend for **[Claude Code](https://claude.ai/code)** — free, no API key.
 
