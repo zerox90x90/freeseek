@@ -4,6 +4,8 @@ Use **DeepSeek** as the backend for **[Claude Code](https://claude.ai/code)** â€
 
 A local proxy that wraps `chat.deepseek.com` (the free web UI) behind an Anthropic-compatible API, so Claude Code can talk to it like it's Claude.
 
+![Screenshot](./Screenshot%202026-04-24%20at%202.18.46%E2%80%AFPM.png)
+
 > Only tested on **macOS**.
 
 ## Prerequisites
